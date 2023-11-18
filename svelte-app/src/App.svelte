@@ -1,4 +1,5 @@
 <script>
+	import { init_position_nodes } from "./position.js";
 	import DummyNode from './DummyNode.svelte';
     import NodeSmall from './NodeSmall.svelte';
 	import ConnectingLine from './ConnectingLine.svelte';
@@ -22,6 +23,8 @@
 		}
 		return null;
   	};
+
+	let { nodes, node_positions } = init_position_nodes(data);
 
 </script>
   
@@ -50,9 +53,11 @@
 />
 -->
 
+{JSON.stringify(nodes)}
+{JSON.stringify(node_positions)}
 <DynamicNode fields={data} />
 
 <br>
 
-<Web />
+<Web bind:nodes bind:node_positions />
   

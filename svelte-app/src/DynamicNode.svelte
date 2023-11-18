@@ -9,9 +9,9 @@
     let node;
 </script>
 
-{#if node_type === 'dummy'}
-    <DummyNode fields={fields} bind:this={node} />
-{:else if node_type === 'dummy-red'}
+{#if node_type === 'dummy-red'}
     <DummyNodeRed fields={fields} bind:this={node} />
+{:else}
+    <DummyNode fields={fields} bind:this={node} />
 {/if}
 

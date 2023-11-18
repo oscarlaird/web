@@ -6,7 +6,6 @@
     $: entries = Object.entries(fields);
 </script>
  
-
 <div class="rectangle">
 {#each entries as [key, value]}
     <div>
@@ -18,7 +17,7 @@
 
 <style>
 .rectangle {
-    border: 1px solid black;
+    border: 1px solid red;
     padding: 10px;
     margin: 10px;
     max-width: 200px;

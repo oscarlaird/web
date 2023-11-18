@@ -1,12 +1,13 @@
 <script>
-	import DummyNode from './DummyNode.svelte';
+	import DynamicNode from "./DynamicNode.svelte";
   
 	let data = {
 	  Name: 'John Doe',
 	  Age: 30,
-	  Occupation: 'Engineer'
+	  Occupation: 'Engineer',
+	  node_type: 'dummy-red'
 	};
 </script>
   
-<DummyNode fields={data} />
+<DynamicNode fields={data} />
   

@@ -9,8 +9,8 @@
 
     export let nodes;
     export let node_positions;
-    export let centerX = 400;
-    export let centerY = 300;
+    export let centerX = 500;
+    export let centerY = 500;
 
     $: position_lookup = nodes.map(node => {
         if (node.id === selected_node_id) return {rel_x: 0, rel_y: 0};
@@ -30,25 +30,67 @@
 
 
     // handle node click
-    function handleNodeClick(node_id) {
+    async function handleNodeClick(node_id) {
         if (node_id === selected_node_id) return;
         // update nodes and node_positions 
         let new_ctr_pos_id = node_positions.find(np => np.node_id === node_id).pos_id;
         let new_ctr_pos = positions.find(pos => pos.pos_id === new_ctr_pos_id);
         centerX += new_ctr_pos.rel_x;
         centerY += new_ctr_pos.rel_y;
-        ({ nodes, node_positions } = new_neighbors("dummy_query", nodes, node_positions, selected_node_id, node_id));
+        ({ nodes, node_positions } = await new_neighbors("dummy_query", nodes, node_positions, selected_node_id, node_id));
         selected_node_id = node_id;
     }
 
     // container element
     let containerElement;
+
+
+    // panning
+  let isDragging = false;
+  let startX, startY;
+  let scrollLeft, scrollTop;
+  let orig_centerX, orig_centerY;
+
+  function onMousedown(event) {
+    isDragging = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    scrollLeft = event.target.scrollLeft;
+    scrollTop = event.target.scrollTop;
+    orig_centerX = centerX;
+    orig_centerY = centerY;
+    
+    // Prevent default to avoid selecting text while dragging
+    event.preventDefault();
+  }
+
+  function onMousemove(event) {
+    if (!isDragging) return;
+
+    const dx = event.clientX - startX;
+    const dy = event.clientY - startY;
+
+    event.target.scrollLeft = scrollLeft - dx;
+    event.target.scrollTop = scrollTop - dy;
+    
+    centerX = orig_centerX + dx;
+    centerY = orig_centerY + dy;
+  }
+
+  function onMouseup() {
+    isDragging = false;
+  }
 </script>
 
 
 {JSON.stringify(positions)}
 <!-- Nodes -->
-<div class="container" bind:this={containerElement}>
+<div class="container" bind:this={containerElement}
+  on:mousedown={onMousedown}
+  on:mousemove={onMousemove}
+  on:mouseup={onMouseup}
+  on:mouseleave={onMouseup}  
+>
 {#each nodes as node, idx (node.id)}
     <div on:click={() => handleNodeClick(node.id)} on:keydown={() => handleNodeClick(node.id)}
         in:fade={{duration: 0, delay: 1000, easing: cubicIn}} out:fade={{duration: 300, delay: 0, easing: cubicOut}}
@@ -71,10 +113,12 @@
 
 <style>
 .container {
-    width: 100vw;
     height: 100vh;
+    width: 100vw;
     overflow: auto;
     position: relative;
+    user-select: none;
+    cursor: grab;
 }
 .node {
     position: absolute;

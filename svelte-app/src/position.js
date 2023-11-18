@@ -1,4 +1,4 @@
-export function fetch_nn(query, node) {
+export function dummy_fetch_nn(query, node) {
     if (node === null || node.content === 'a') {
       // Return 15 new nodes when node is null
       return [
@@ -20,6 +20,20 @@ export function fetch_nn(query, node) {
     }
   }
 
+export async function fetch_nn(query, node) {
+  // http://localhost:5000/get_similar_games?query=competitive%20battle%20royale
+  console.log("query: ", query);
+  let data = await fetch(`http://localhost:5000/get_similar_games?query=${query}`).then(res => res.json())
+  console.log("data: ", data);
+  // add id=_row_id to each node
+  data = data.map((node, index) => {
+    node.id = node._row_id;
+    return node;
+  });
+  return data;
+}
+  
+
 export function polarToCartesian(position) {
     // Convert angle from degrees to radians
     let angleRadians = position.theta * (Math.PI / 180);
@@ -34,15 +48,15 @@ export function polarToCartesian(position) {
 
 export let positions = [
     { pos_id: 0, ux_dist: 0, theta: 0 },
-    { pos_id: 1, ux_dist: 310, theta: 0 },
-    { pos_id: 2, ux_dist: 320, theta: 80 },
-    { pos_id: 3, ux_dist: 330, theta: 160 },
-    { pos_id: 4, ux_dist: 340, theta: 240 },
-    { pos_id: 5, ux_dist: 350, theta: 320 },  // -40
-    { pos_id: 6, ux_dist: 360, theta: 40 },
-    { pos_id: 7, ux_dist: 370, theta: 120 },
-    { pos_id: 8, ux_dist: 380, theta: 200 },
-    { pos_id: 9, ux_dist: 390, theta: 280 }
+    { pos_id: 1, ux_dist: 410, theta: 0 },
+    { pos_id: 2, ux_dist: 420, theta: 80 },
+    { pos_id: 3, ux_dist: 430, theta: 160 },
+    { pos_id: 4, ux_dist: 440, theta: 240 },
+    { pos_id: 5, ux_dist: 450, theta: 320 },  // -40
+    { pos_id: 6, ux_dist: 460, theta: 40 },
+    { pos_id: 7, ux_dist: 470, theta: 120 },
+    { pos_id: 8, ux_dist: 480, theta: 200 },
+    { pos_id: 9, ux_dist: 490, theta: 280 }
 ];
 
 positions.map(position => {
@@ -52,8 +66,8 @@ positions.map(position => {
     return position;
 });
 
-export function init_position_nodes(query) {
-    const fetchedNodes = fetch_nn(query, null);
+export async function init_position_nodes(query) {
+    const fetchedNodes = await fetch_nn(query, null);
     const nodePositionTable = fetchedNodes.slice(0, 10).map((node, index) => {  // assuming we get the fetchedNodes in sorted order, 
       return { node_id: node.id, pos_id: positions[index].pos_id };
     });

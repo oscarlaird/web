@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import { init_position_nodes } from "./position.js";
 	import DummyNode from './DummyNode.svelte';
     import NodeSmall from './NodeSmall.svelte';
@@ -24,7 +25,13 @@
 		return null;
   	};
 
-	let { nodes, node_positions } = init_position_nodes(data);
+	let nodes = [];
+	let node_positions = [];
+
+	// on mount init_position_nodes
+	onMount(async () => {
+		({nodes, node_positions} = await init_position_nodes(data));
+	})
 
 </script>
   
@@ -53,8 +60,6 @@
 />
 -->
 
-{JSON.stringify(nodes)}
-{JSON.stringify(node_positions)}
 <DynamicNode fields={data} />
 
 <br>

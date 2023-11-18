@@ -25,6 +25,10 @@ a:visited {
 	color: rgb(0,80,160);
 }
 
+h2 {
+	color: tomato;
+}
+
 label {
 	display: block;
 }

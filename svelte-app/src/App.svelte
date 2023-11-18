@@ -4,11 +4,14 @@
 	import ConnectingLine from './ConnectingLine.svelte';
     import Toolbar from './Toolbar.svelte';
     //import OpenAiPrompter from './OpenAIPrompter.svelte';
+	import DynamicNode from "./DynamicNode.svelte";
+	import Web from "./Web.svelte";
   
 	let data = {
 	  Name: 'John Doe',
 	  Age: 30,
-	  Occupation: 'Engineer'
+	  Occupation: 'Engineer',
+	  node_type: 'dummy-red'
 	};
 
 	//Leftover code fragment trying to draw svg line
@@ -47,3 +50,9 @@
 />
 -->
 
+<DynamicNode fields={data} />
+
+<br>
+
+<Web />
+  

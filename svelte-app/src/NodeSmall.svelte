@@ -1,5 +1,8 @@
 <script>
     // Props received by the component
+    import { Accordion, AccordionItem } from 'svelte-collapsible'
+
+
     export let fields = {};
 
     export let isSelected = false;
@@ -24,6 +27,31 @@
     export let active = false;
 
 
+    const items = [
+		{
+			key: 'a',
+			img: 'https://picsum.photos/100?random=1',
+			title: 'untoward',
+			subtitle: 'Details',
+			text: 'Oh wow, look at these details.'
+		},
+		{
+			key: 'b',
+			img: 'https://picsum.photos/100?random=2',
+			title: 'trill',
+			subtitle: 'a quavering or vibratory sound, especially a rapid alternation of sung or played notes.',
+			text: 'Many languages include a trill in their pronunciation, the sound of a consonant spoken while the tongue vibrates in a very specific way against the teeth or roof of the mouth. To pronounce this sound is also to trill. The word originally referred to a vibrating or warbling sound made by a singer, from the Italian word trillio, "a quavering or warbling," and its also often used to describe the sound a bird makes.'
+		},
+		{
+			key: 'c',
+			img: 'https://picsum.photos/100?random=3',
+			title: 'chinwag',
+			subtitle: 'a long and pleasant conversation between friends',
+			text: 'The journalist, who seems oddly unalarmed by the frequent reports of murders, loves a good chin-wag and keeps trying to chum up to Tshembe, who wants none of him.'
+		}
+	]
+
+
   </script>
   
 <style>
@@ -43,7 +71,8 @@
 }
 
 .active {
-    width: 250px;
+    max-width: 500px;
+    max-height: 500px;
     border: 5px solid black;
     /*background: tomato;	*/
     border-color: tomato;
@@ -63,6 +92,22 @@
     y={y}
     width={width}
     height={height}
+
+    <Accordion>
+        <AccordionItem>
+            <div slot='header' class='header'>
+                <div>
+                    <h2>Details</h2>
+                </div>
+            </div>
+            <div slot='body' class='body'>
+                {#each entries as [key, value]}
+                    <h2>{ key }</h2>
+                    <p> {value} </p>
+                { /each }
+            </div>
+        </AccordionItem>
+    </Accordion>
 
 </button>
 

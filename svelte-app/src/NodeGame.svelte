@@ -83,13 +83,13 @@ button img {
 <button class:active={active} class="node_large" on:click={() => {active = !active}}>
 
     <!-- Large Node -->
-    <h2>{entries[0][1]}</h2>                                        <!-- Name -->
-    <img src={entries[1][1]} width="460px" height="215px">          <!-- Image -->
-    <p>Developer: {entries[3][1]}</p>                               <!-- Developer -->
-    <p>Release Date: {entries[2][1]}</p>                            <!-- Release Date -->
-    <p>{entries[4][1]}</p>                                          <!-- About -->
-    <p>{entries[5][1]}</p>                                          <!-- Price -->
-    <a href="{entries[6][1]}" target="_blank">{entries[6][1]}</a>   <!-- Steam Link -->
+    <h2>{fields.name}</h2>                                        <!-- Name -->
+    <img src={fields.img_url} width="460px" height="215px">          <!-- Image -->
+    <p>Developer: {fields.developer}</p>                               <!-- Developer -->
+    <p>Release Date: {fields.date}</p>                            <!-- Release Date -->
+    <p>{fields.full_desc}</p>                                          <!-- About -->
+    <p>{fields.price}</p>                                          <!-- Price -->
+    <a href="{fields.url_info}" target="_blank">{entries[6][1]}</a>   <!-- Steam Link -->
 </button>
 {/if}
 
@@ -101,10 +101,10 @@ button img {
     on:mouseout={() => {hover = !hover}}
     on:blur={() => {hover = !hover}}>
     <!-- Small Node -->
-    <h2>{entries[0][1]}</h2>                                        <!-- Name -->
-    <img src={entries[1][1]} width="172px" height="80px">          <!-- Image -->
-    <p>Developer: {entries[3][1]}</p>                               <!-- Developer -->
-    <p>Release Date: {entries[2][1]}</p>                            <!-- Release Date -->
+    <h2>{fields.name}</h2>                                        <!-- Name -->
+    <img src={fields.img_url} width="172px" height="80px">          <!-- Image -->
+    <p>Developer: {fields.developer}</p>                               <!-- Developer -->
+    <p>Release Date: {fields.date}</p>                            <!-- Release Date -->
 
     <!--
     <div class:expanded={hover}>

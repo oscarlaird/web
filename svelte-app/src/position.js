@@ -22,6 +22,10 @@ export function dummy_fetch_nn(query, node) {
 
 export async function fetch_nn(query, node) {
   // http://localhost:5000/get_similar_games?query=competitive%20battle%20royale
+  console.log("node: ", node)
+  if (node !== null) {
+    query = node.full_desc;
+  };
   console.log("query: ", query);
   let data = await fetch(`http://localhost:5000/get_similar_games?query=${query}`).then(res => res.json())
   console.log("data: ", data);
@@ -73,18 +77,19 @@ export async function init_position_nodes(query) {
     });
     return {
         nodes: fetchedNodes.slice(0, 10),
-        node_positions: nodePositionTable
+        node_positions: nodePositionTable,
+        selected_node_id: fetchedNodes[0].id
     }
   }
 
 export function calculatePolarAngle(node, center) {
     return Math.atan2(node.y - center.y, node.x - center.x) * (180 / Math.PI);
 }
-export function new_neighbors(query, old_neighbors, old_node_positions, old_center_node_id, new_center_node_id) {
+export async function new_neighbors(query, old_neighbors, old_node_positions, old_center_node_id, new_center_node_id) {
     // Fetch new neighbors
     let node = old_neighbors.find(neighbor => neighbor.id === new_center_node_id);
     console.log("node: ", node);
-    let fetchedNewNeighbors = fetch_nn(query, node);
+    let fetchedNewNeighbors = await fetch_nn(query, node);
     console.log("fetchedNewNeighbors: ", fetchedNewNeighbors);
     // remove node from fetchedNewNeighbors and old_neighbors ( use filter )
     fetchedNewNeighbors = fetchedNewNeighbors.filter(newNode => newNode.id !== node.id);
@@ -162,7 +167,7 @@ export function new_neighbors(query, old_neighbors, old_node_positions, old_cent
     console.log("positionsTable: ", positionsTable);
     return {
       nodes: [node, ...preservedNeighbors, ...newExclusiveNeighbors],
-      node_positions: positionsTable
+      node_positions: positionsTable,
     };
   }
   

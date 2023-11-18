@@ -55,12 +55,12 @@
   </script>
   
 <style>
-.node_small {
+.node_large {
     
     padding: 10px;
     margin: 10px;
-    max-width: 200px;
-    height:200px;
+    width: 500px;
+    height:500px;
     
 	filter: drop-shadow(20px);
 	border-radius: 20px;
@@ -81,7 +81,7 @@
 
 </style>
 
-<button class:active={active} class="node_small" on:click={() => {active = !active}}>
+<button class:active={active} class="node_large" on:click={() => {active = !active}}>
     {#each entries as [key, value]}
         <div>
         <strong>{key}:</strong> {value}

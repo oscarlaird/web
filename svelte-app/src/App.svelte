@@ -1,5 +1,6 @@
 <script>
 	import DynamicNode from "./DynamicNode.svelte";
+	import Web from "./Web.svelte";
   
 	let data = {
 	  Name: 'John Doe',
@@ -10,4 +11,8 @@
 </script>
   
 <DynamicNode fields={data} />
+
+<br>
+
+<Web />
   

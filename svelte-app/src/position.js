@@ -1,5 +1,5 @@
 export function fetch_nn(query, node) {
-    if (node === null) {
+    if (node === null || node.content === 'a') {
       // Return 15 new nodes when node is null
       return [
         { id: 1, content: 'a' }, { id: 2, content: 'b' }, { id: 3, content: 'c' },

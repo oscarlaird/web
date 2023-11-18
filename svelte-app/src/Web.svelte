@@ -1,5 +1,7 @@
 <script>
     import { new_neighbors, positions } from "./position.js";
+    import { fade } from "svelte/transition";
+    import { cubicOut, cubicIn } from "svelte/easing";
     import DynamicNode from "./DynamicNode.svelte";
     // We receive nodes, node_positions, and positions
     // export let docs = [{title: "doc1", content: "content1"}, {title: "doc2", content: "content2"}, {title: "doc3", content: "content3"}, {title: "doc4", content: "content4"}];
@@ -29,6 +31,7 @@
 
     // handle node click
     function handleNodeClick(node_id) {
+        if (node_id === selected_node_id) return;
         // update nodes and node_positions 
         let new_ctr_pos_id = node_positions.find(np => np.node_id === node_id).pos_id;
         let new_ctr_pos = positions.find(pos => pos.pos_id === new_ctr_pos_id);
@@ -48,19 +51,22 @@
 <div class="container" bind:this={containerElement}>
 {#each nodes as node, idx (node.id)}
     <div on:click={() => handleNodeClick(node.id)} on:keydown={() => handleNodeClick(node.id)}
+        in:fade={{duration: 0, delay: 1000, easing: cubicIn}} out:fade={{duration: 300, delay: 0, easing: cubicOut}}
         class="node" style="left: {centerX + position_lookup[idx].rel_x}px; top: {centerY + position_lookup[idx].rel_y}px;">
         <DynamicNode fields={node} />
     <!-- Include content like text or embedded videos -->
     </div>
 {/each}
 <!-- Connecting Lines -->
-<svg class="overlay" style="width: 100%; height: 100%;">
+{#key selected_node_id}
+<svg class="overlay" style="width: 100%; height: 100%;" in:fade={{duration: 0, delay: 1000, easing: cubicIn}} out:fade={{duration: 300, delay: 0, easing: cubicOut}}>
     {#each lines as line}
         <line x1={line.x1 + 'px'} y1={line.y1 + 'px'} 
                 x2={line.x2 + 'px'} y2={line.y2 + 'px'} 
                 stroke="black" />
     {/each}
 </svg>
+{/key}
 </div>
 
 <style>
@@ -77,7 +83,7 @@
     border: 1px solid black;
     padding: 10px;
     background: white;
-    transition: left 0.5s, top 0.5s; /* Adjust the duration as needed */
+    transition: left 1.0s, top 1.0s; /* Adjust the duration as needed */
 }
 .overlay {
         position: absolute;

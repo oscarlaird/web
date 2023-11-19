@@ -38,6 +38,11 @@
     transition: .1s;
 }
 
+p {
+    height: 250px;
+    overflow-y: auto;
+}
+
 </style>
 
 <button class="node_small" 

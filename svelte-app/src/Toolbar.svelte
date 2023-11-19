@@ -35,7 +35,7 @@
 }
 .answer_box {
     width: 380px;
-    height: 400px;
+    height: 600px;
     display: flex;
     align-items: flex-start;
     gap: 10px;

@@ -34,16 +34,23 @@
   font-size: 1.5em;
 }
 .answer_box {
-    width: 400px;
-    height: 100px;
+    width: 380px;
+    height: 400px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
-    border: 2px solid black;
+    border: 0px;
     border-radius: 10px;
     padding: 10px;
     background: var(--background);
+    overflow-y: auto;
+    
 }
+
+.answer_box p {
+    font-size: medium;
+}
+
 </style>
 
 <div class="toolbar">

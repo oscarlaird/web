@@ -4,6 +4,9 @@
     // display a youtube video given the start_time, transcript, and src_url
     // Construct the YouTube URL with timestamp
     $: youtubeUrl = `https://www.youtube.com/embed/${fields.video_id}?start=${fields.start_time}`;
+
+    export let active = false;
+    export let hover = false;
 </script>
   
 <style>
@@ -30,19 +33,24 @@
 
 .active {
     border: 5px solid black;
-    border-color: tomato;
+    border-color: var(--tertiary);
     transition: .1s;
 }
 
 .hover {
     border: 5px solid black;
-    border-color: navy;
+    border-color: var(--tertiary);
     transition: .1s;
 }
 
 </style>
 
-<div class="node_small" >
+<button class="node_small" class:active={active} class:hover={hover}  
+on:click={() => {active = !active}} 
+on:mouseover={() => {hover = !hover}}
+on:focus={() => {hover = !hover}}
+on:mouseout={() => {hover = !hover}}
+on:blur={() => {hover = !hover}}>
 
 <!-- YouTube Video Embed -->
 {#if fields.video_id && fields.start_time}
@@ -58,4 +66,4 @@
     <p>{fields.transcript}</p>
 {/if}
 
-</div>
+</button>

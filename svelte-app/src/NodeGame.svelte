@@ -78,7 +78,7 @@
 
 .hover {
     border: 5px solid black;
-    border-color: navy;
+    border-color: var(--tertiary);
     transition: .1s;
 }
 

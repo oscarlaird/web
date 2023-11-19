@@ -66,9 +66,18 @@
 {#key selected_node_id}
 <svg class="overlay" style="width: 100%; height: 100%;" in:fade={{duration: 0, delay: 1000, easing: cubicIn}} out:fade={{duration: 300, delay: 0, easing: cubicOut}}>
     {#each lines as line}
-        <line x1={line.x1 + 'px'} y1={line.y1 + 'px'} 
-                x2={line.x2 + 'px'} y2={line.y2 + 'px'} 
-                stroke=var(--tertiary) stroke-width={11 - line.stroke_width} />
+        <g class="line-group">
+            <line x1={line.x1 + 'px'} y1={line.y1 + 'px'} 
+                  x2={line.x2 + 'px'} y2={line.y2 + 'px'} 
+                  stroke=var(--tertiary) stroke-width={11 - line.stroke_width} />
+            <rect class="text-background" x={((line.x1 + line.x2) / 2) - 20 + 'px'} 
+                  y={((line.y1 + line.y2) / 2) - 10 + 'px'} 
+                  width="40" height="20" />
+            <text x={((line.x1 + line.x2) / 2) + 'px'} 
+                  y={((line.y1 + line.y2) / 2) + 'px'}>
+                {line.stroke_width}
+            </text>
+        </g>
     {/each}
 </svg>
 {/key}
@@ -95,4 +104,23 @@
         left: 0;
         z-index: 0;
     }
+
+.line-group:hover .text-background {
+    visibility: visible;
+}
+.line-group:hover text {
+    visibility: visible;
+}
+.text-background {
+    visibility: hidden;
+    fill: white;
+    border: 1px solid black;
+}
+text {
+    visibility: hidden;
+    fill: black;
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+
 </style>

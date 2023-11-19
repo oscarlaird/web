@@ -60,8 +60,8 @@
 	}
 
 	async function ask() {
-		console.log("ask");
-		data = await ask_gpt(query, nodes);
+		console.log("ask", nodes);
+		data = await ask_gpt(question, nodes);
 		answer = data.answer;
 	}
 
@@ -71,11 +71,10 @@
 </script>
   
 <div class="toolbar-container">
-	<Toolbar bind:query on:click={search_query} bind:dataset on:ask={ask} />
-	{answer}
+	<Toolbar bind:query on:click={search_query} bind:dataset on:ask={ask} answer={answer} bind:question />
 </div>
 
-<Web bind:nodes bind:node_positions bind:selected_node_id bind:dataset bind:question />
+<Web bind:nodes bind:node_positions bind:selected_node_id bind:dataset />
 
 <style>
 	/* toolbar-container is absolute positioned in center top (overlay w/ opacity) */

@@ -3,6 +3,8 @@
     import SelectorDropdownDataset from "./SelectorDropdownDataset.svelte";   
     import SelectorDropdownFunction from "./SelectorDropdownFunction.svelte";
 
+    export let query;
+
     const handleDatasetChange = (event) => {
         const selectedOption = event.target.value;
         const options = document.querySelectorAll('#dataset-selector option');
@@ -52,4 +54,5 @@
     <SelectorDropdownFunction />
     <NodeGeneratorButton />
 </div>
+<input type="text" placeholder="Search your vector database" bind:value={query} />
 <div id="node-container"></div>

@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import { init_position_nodes } from "./position.js";
 	import DummyNode from './DummyNode.svelte';
     import NodeSmall from './NodeSmall.svelte';
@@ -9,6 +10,7 @@
 	import Web from "./Web.svelte";
     import NodeGame from "./NodeGame.svelte";
 
+	let query;
   
 	let data = {
 	  Name: 'John Doe',
@@ -51,7 +53,19 @@
 		return null;
   	};
 
-	let { nodes, node_positions } = init_position_nodes(data);
+	let nodes = [];
+	let node_positions = [];
+	let selected_node_id;
+
+	// on mount init_position_nodes
+	onMount(async () => {
+		({nodes, node_positions, selected_node_id } = await init_position_nodes("initial_query"));
+	})
+
+	async function search_query() {
+		console.log(query);
+		({nodes, node_positions, selected_node_id } = await init_position_nodes(query));
+	}
 
 </script>
   
@@ -61,31 +75,9 @@
 <NodeGame fields={games_test_data} id={'rectangle2'}/>
 <Toolbar />
 
-
-<!--
-{#if data}
-<ConnectingLine
-  :rectangle1CenterX={getRectangleCenterCoordinates('rectangle1').left + 100 / 2}
-  :rectangle1CenterY={getRectangleCenterCoordinates('rectangle1').top + 100 / 2}
-  :rectangle2CenterX={getRectangleCenterCoordinates('rectangle2').left + 200 / 2}
-  :rectangle2CenterY={getRectangleCenterCoordinates('rectangle2').top + 200 / 2}
-/>
-{/if}
+<input bind:value={query} />
+<button on:click={search_query}>Search</button>
 
 
-<ConnectingLine
-  :rectangle1CenterX={getRectangleCenterCoordinates('rectangle1').left + 100 / 2}
-  :rectangle1CenterY={getRectangleCenterCoordinates('rectangle1').top + 100 / 2}
-  :rectangle2CenterX={getRectangleCenterCoordinates('rectangle2').left + 200 / 2}
-  :rectangle2CenterY={getRectangleCenterCoordinates('rectangle2').top + 200 / 2}
-/>
--->
-
-{JSON.stringify(nodes)}
-{JSON.stringify(node_positions)}
-<DynamicNode fields={data} />
-
-<br>
-
-<Web bind:nodes bind:node_positions />
+<Web bind:nodes bind:node_positions bind:selected_node_id />
   

@@ -8,6 +8,7 @@
  
 
 <div class="rectangle">
+{fields.name}
 {#each entries as [key, value]}
     <div>
     <strong>{key}:</strong> {value}

@@ -18,9 +18,20 @@
         border: 0px;
         margin-left: 5px;
     }
+
+    .search_span {
+        width: 400px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    input {
+        width: 335px;
+    }
 </style>
 
-<span>
+<span class = search_span>
 <input type="text" bind:value={query} placeholder="Search Vector Database" />
 <button class="go_button" on:click={handleClick}>GO</button>
 </span>

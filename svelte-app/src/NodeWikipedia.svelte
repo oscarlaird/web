@@ -43,9 +43,9 @@
 <button class="node_small" 
     class:active={active} class:hover={hover}  
     on:click={() => {active = !active}} 
-    on:mouseover={() => {hover = !hover, expandDetails}}
+    on:mouseover={() => {hover = !hover}}
     on:focus={() => {hover = !hover}}
-    on:mouseout={() => {hover = !hover, hideDetails}}
+    on:mouseout={() => {hover = !hover}}
     on:blur={() => {hover = !hover}}>
     <!-- title -->
     <h2>{fields.title}</h2>

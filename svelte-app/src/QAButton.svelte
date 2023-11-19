@@ -18,9 +18,21 @@
     border: 0px;
     margin-left: 5px;
 }
+
+.search_span {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+input {
+    width: 330px;
+}
+
 </style>
 
-<span>
+<span class="search_span">
 
 <input type="text" bind:value={question} placeholder="Ask a Question..." />
 <button class="qa_button" on:click={handleAsk}>ASK</button>

@@ -14,7 +14,7 @@
 	let query;
 	let dataset;
 	let question;
-	let answer = 'answer here';
+	let answer = 'OpenAI Response Here';
   
 	let data = {
 	  Name: 'John Doe',

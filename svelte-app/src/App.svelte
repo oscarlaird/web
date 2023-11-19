@@ -22,7 +22,7 @@
 
 	let games_test_data = {
 		name: 'Among Us',
-		img_url: 'https//steamcdn-a.akamaihd.net/steam/apps/945360/header.jpg?t=1598556351',
+		img_url: 'https://steamcdn-a.akamaihd.net/steam/apps/945360/header.jpg?t=1598556351',
 		date: 'Nov 16, 2018',
 		developer: 'Innersloth',
 		full_desc: 'About this game: vibeo gamejbvoubvouyebwvuywgbvuyqbuqvbuqborvbvbuerb oruybwouyvoybvewboyu',

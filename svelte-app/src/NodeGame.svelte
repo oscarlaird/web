@@ -13,7 +13,17 @@
     export let active = false;
     export let hover = false;
 
-    export let nodeType = 'Large';
+    export let nodeType = 'Small';
+
+    let showParagraph = false;
+
+    function expandDetails() {
+        showParagraph = true;
+    }
+
+    function hideDetails() {
+        showParagraph = false;
+    }
 
     /*
     function expandDetails() = {
@@ -36,6 +46,8 @@
     
 	filter: drop-shadow(20px);
 	border-radius: 20px;
+    border-color: #f4f4f4;
+
 
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 
@@ -49,6 +61,8 @@
     
 	filter: drop-shadow(20px);
 	border-radius: 20px;
+    border: 5px solid black;
+    border-color: #f4f4f4;
 
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 
@@ -96,9 +110,9 @@ button img {
 {#if nodeType == 'Small'}
 <button class:active={active} class:hover={hover} class="node_small" 
     on:click={() => {active = !active}} 
-    on:mouseover={() => {hover = !hover}}
+    on:mouseover={() => {hover = !hover, expandDetails}}
     on:focus={() => {hover = !hover}}
-    on:mouseout={() => {hover = !hover}}
+    on:mouseout={() => {hover = !hover, hideDetails}}
     on:blur={() => {hover = !hover}}>
     <!-- Small Node -->
     <h2>{fields.name}</h2>                                        <!-- Name -->
@@ -106,11 +120,14 @@ button img {
     <p>Developer: {fields.developer}</p>                               <!-- Developer -->
     <p>Release Date: {fields.date}</p>                            <!-- Release Date -->
 
+    
     <!--
-    <div class:expanded={hover}>
-        <p>hello</p>
+    <div on:mouseover={expanddetails} on:mouseout={hideDetails}>
+        <p>{showParagraph ? 'Hovering over box!' : ''}</p>
     </div>
-    -->
+-->
+      
+    
 </button>
 {/if}
 

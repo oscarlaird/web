@@ -4,6 +4,8 @@
 	const datasetItems = [
 		{value: 'research', label: 'Research'},
         {value: 'wikipedia', label: 'Wikipedia'},
+        {value: 'games', label: 'Games'},
+        {value: 'words', label: 'Words'},
 	];
 	
 	const groupBy = (item) => item.group;
@@ -13,7 +15,8 @@
 
 <style>
     .selector_div {
-        width: 300px;
+        width: 400px;
+        height: 100px;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -22,6 +25,5 @@
 
 
 <div class="selector_div">
-    <h2>Dataset:</h2>
-    <Select items={datasetItems} --border-radius="10px"></Select>
+    <Select items={datasetItems} --border-radius="10px" placeholder="Select a dataset"></Select>
 </div>

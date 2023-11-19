@@ -57,8 +57,27 @@
 
 </script>
   
-<NodeGame fields={games_test_data} id={'rectangle2'}/>
-<Toolbar />
+<div class="toolbar-container">
+	<Toolbar bind:query on:click={search_query} />
+</div>
 
 <Web bind:nodes bind:node_positions bind:selected_node_id />
+
+<style>
+	/* toolbar-container is absolute positioned in center top (overlay w/ opacity) */
+	.toolbar-container {
+		padding-top: 50px;
+		padding-left: 20px;
+		padding-right: 20px;
+		position: absolute;
+		height: 100%;
+		width: 440px;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		border: 2px solid black;
+		/* set background opacity to 60% */
+		background-color: rgba(141, 21, 21, 0.9);
+	}
+</style>
   

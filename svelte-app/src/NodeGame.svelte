@@ -115,9 +115,9 @@ button img {
     on:mouseout={() => {hover = !hover, hideDetails}}
     on:blur={() => {hover = !hover}}>
     <!-- Small Node -->
-    <h2>{fields.name}</h2>                                        <!-- Name -->
+    <a href="{fields.url_info}"><h2>{fields.name}</h2></a>                                     <!-- Name -->
     <img src={fields.img_url} width="172px" height="80px">          <!-- Image -->
-    <p>Developer: {fields.developer}</p>                               <!-- Developer -->
+    <p>{fields.developer}</p>                               <!-- Developer -->
     <p>Release Date: {fields.date}</p>                            <!-- Release Date -->
 
     

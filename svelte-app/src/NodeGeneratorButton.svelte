@@ -1,23 +1,16 @@
 <script>
-    import NodeSmall from "./NodeSmall.svelte";
-
-    let nodes = [];
-
-    // Props received by the component
-    //export let data = {};
-  
-    // Reactive statement to get keys and values from the fields object
-
-    function addNodeComponents() {
-        const parentElement = document.getElementById('node-container');
-        for (let i = 0; i < 2; i++) {
-            const nodeComponent = new NodeSmall({ target: parentElement });
-            nodeCount++;
-            nodes.push(nodeComponent);
-        }
+    export let query;
+    /* send event on button press */
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+    function handleClick() {
+        dispatch('click', {
+            query: query
+        });
     }
-
-
 </script>
 
-<button on:click={addNodeComponents}>GO</button>
+<span>
+<input type="text" bind:value={query} placeholder="Search Vector Database" />
+<button on:click={handleClick}>GO</button>
+</span>

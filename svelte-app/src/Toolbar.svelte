@@ -1,58 +1,35 @@
 <script>
-    import NodeGeneratorButton from "./NodeGeneratorButton.svelte";
     import SelectorDropdownDataset from "./SelectorDropdownDataset.svelte";   
-    import SelectorDropdownFunction from "./SelectorDropdownFunction.svelte";
+    import NodeGeneratorButton from "./NodeGeneratorButton.svelte";
+    import QAButton from "./QAButton.svelte";
 
     export let query;
 
-    const handleDatasetChange = (event) => {
-        const selectedOption = event.target.value;
-        const options = document.querySelectorAll('#dataset-selector option');
+    /* send event on button press */
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+    function handleClick() {
+        dispatch('click', {
+            query: query
+        });
+    }
 
-        for (const option of options) {
-            option.style.backgroundColor = 'none';
-        }
-
-        document.querySelector('#dataset-selector option[value="${selectedOption}"]').style.backgroundColor = 'red';
-    };
 </script>
 
 <style>
 .toolbar {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 40px;
   justify-content: center;
-
-  border-radius: 10px;
-  /*background-color: #f1f1f1;*/
-
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-
+  font-size: 1.5em;
 }
 
-.toolbar label {
-  font-weight: bold;
-}
-
-#dataset-selector {
-  padding: 5px;
-  border: 1px solid #ccc;
-}
 </style>
 
 <div class="toolbar">
-    <!--
-    <label for="dataset-selector">Dataset:</label>
-    <select id="dataset-selector" on:change={handleDatasetChange}>
-        <option value="research">Research</option>
-        <option value="wikipedia">Wikipedia</option>
-        <option value="videos">Videos</option>
-    </select>
-    -->
     <SelectorDropdownDataset />
-    <SelectorDropdownFunction />
-    <NodeGeneratorButton />
+    <NodeGeneratorButton bind:query on:click={handleClick} />
+    <QAButton />
 </div>
-<input type="text" placeholder="Search your vector database" bind:value={query} />
-<div id="node-container"></div>

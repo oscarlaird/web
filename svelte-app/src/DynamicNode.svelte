@@ -8,6 +8,8 @@
     export let fields = {};
     $: node_type = fields['node_type']
 
+
+
     let node;
 </script>
 

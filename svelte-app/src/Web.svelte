@@ -9,8 +9,8 @@
 
     export let nodes;
     export let node_positions;
-    export let centerX = 1000;
-    export let centerY = 500;
+    export let centerX = 1300;
+    export let centerY = 550;
 
     $: position_lookup = nodes.map(node => {
         if (node.id === selected_node_id) return {rel_x: 0, rel_y: 0};
@@ -24,7 +24,8 @@
             x1: centerX,
             y1: centerY,
             x2: centerX + position_lookup[idx].rel_x,
-            y2: centerY + position_lookup[idx].rel_y
+            y2: centerY + position_lookup[idx].rel_y,
+            stroke_width: node_positions.find(np => np.node_id === node.id).pos_id
         }
     }).filter(line => line !== null);
 
@@ -45,50 +46,11 @@
     let containerElement;
 
 
-    // panning
-  let isDragging = false;
-  let startX, startY;
-  let scrollLeft, scrollTop;
-  let orig_centerX, orig_centerY;
-
-  function onMousedown(event) {
-    isDragging = true;
-    startX = event.clientX;
-    startY = event.clientY;
-    scrollLeft = event.target.scrollLeft;
-    scrollTop = event.target.scrollTop;
-    orig_centerX = centerX;
-    orig_centerY = centerY;
-    
-    // Prevent default to avoid selecting text while dragging
-    event.preventDefault();
-  }
-
-  function onMousemove(event) {
-    if (!isDragging) return;
-
-    const dx = event.clientX - startX;
-    const dy = event.clientY - startY;
-
-    event.target.scrollLeft = scrollLeft - dx;
-    event.target.scrollTop = scrollTop - dy;
-    
-    centerX = orig_centerX + dx;
-    centerY = orig_centerY + dy;
-  }
-
-  function onMouseup() {
-    isDragging = false;
-  }
 </script>
 
 
 <!-- Nodes -->
 <div class="container" bind:this={containerElement}
-  on:mousedown={onMousedown}
-  on:mousemove={onMousemove}
-  on:mouseup={onMouseup}
-  on:mouseleave={onMouseup}  
 >
 {#each nodes as node, idx (node.id)}
     <div on:click={() => handleNodeClick(node.id)} on:keydown={() => handleNodeClick(node.id)}
@@ -104,7 +66,7 @@
     {#each lines as line}
         <line x1={line.x1 + 'px'} y1={line.y1 + 'px'} 
                 x2={line.x2 + 'px'} y2={line.y2 + 'px'} 
-                stroke="black" />
+                stroke="black" stroke-width={11 - line.stroke_width} />
     {/each}
 </svg>
 {/key}
@@ -114,26 +76,22 @@
 .container {
     height: 100vh;
     width: 100vw;
-    overflow: auto;
+    overflow: hidden;
     position: relative;
     user-select: none;
     cursor: grab;
 }
 .node {
     position: absolute;
-    min-width: 150px;
-    min-height: 100px;
-    border: 1px solid black;
-    padding: 10px;
-    background: white;
     transition: left 1.0s, top 1.0s; /* Adjust the duration as needed */
     transition-delay: 0ms;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 .overlay {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
+        z-index: 0;
     }
 </style>

@@ -84,7 +84,7 @@ button img {
 
     <!-- Large Node -->
     <h2>{fields.name}</h2>                                        <!-- Name -->
-    <img src={fields.img_url} width="460px" height="215px">          <!-- Image -->
+    <img src={fields.img_url} width="460px" height="215px" loading="lazy">          <!-- Image -->
     <p>Developer: {fields.developer}</p>                               <!-- Developer -->
     <p>Release Date: {fields.date}</p>                            <!-- Release Date -->
     <p>{fields.full_desc}</p>                                          <!-- About -->

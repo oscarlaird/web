@@ -69,7 +69,7 @@
         <g class="line-group">
             <line x1={line.x1 + 'px'} y1={line.y1 + 'px'} 
                   x2={line.x2 + 'px'} y2={line.y2 + 'px'} 
-                  stroke="black" stroke-width={11 - line.stroke_width} />
+                  stroke=var(--tertiary) stroke-width={11 - line.stroke_width} />
             <rect class="text-background" x={((line.x1 + line.x2) / 2) - 20 + 'px'} 
                   y={((line.y1 + line.y2) / 2) - 10 + 'px'} 
                   width="40" height="20" />

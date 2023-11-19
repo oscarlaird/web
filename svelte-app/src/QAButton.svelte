@@ -10,7 +10,18 @@
     }
 </script>
 
+<style>
+.qa_button {
+    border-radius: 10px;
+    color: var(--primary);
+    background-color: var(--tertiary);
+    border: 0px;
+    margin-left: 5px;
+}
+</style>
+
 <span>
+
 <input type="text" bind:value={question} placeholder="Ask a Question..." />
-<button on:click={handleAsk}>ASK</button>
+<button class="qa_button" on:click={handleAsk}>ASK</button>
 </span>

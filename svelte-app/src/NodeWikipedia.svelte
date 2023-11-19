@@ -2,6 +2,9 @@
     // Props received by the component
     export let fields = {};
 
+    export let active = false;
+    export let hover = false;
+
 </script>
   
 <style>
@@ -25,21 +28,27 @@
 
 .active {
     border: 5px solid black;
-    border-color: tomato;
+    border-color: var(--tertiary);
     transition: .1s;
 }
 
 .hover {
     border: 5px solid black;
-    border-color: navy;
+    border-color: var(--tertiary);
     transition: .1s;
 }
 
 </style>
 
-<div class="node_small" >
+<button class="node_small" 
+    class:active={active} class:hover={hover}  
+    on:click={() => {active = !active}} 
+    on:mouseover={() => {hover = !hover, expandDetails}}
+    on:focus={() => {hover = !hover}}
+    on:mouseout={() => {hover = !hover, hideDetails}}
+    on:blur={() => {hover = !hover}}>
     <!-- title -->
     <h2>{fields.title}</h2>
     <!-- content -->
     <p>{fields.content}</p>
-</div>
+</button>

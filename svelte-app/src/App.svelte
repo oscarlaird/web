@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	import { init_position_nodes } from "./position.js";
+	import { ask_gpt } from "./ask.js";
 	import DummyNode from './DummyNode.svelte';
     import NodeSmall from './NodeSmall.svelte';
 	import ConnectingLine from './ConnectingLine.svelte';
@@ -12,6 +13,8 @@
 
 	let query;
 	let dataset;
+	let question;
+	let answer = 'answer here';
   
 	let data = {
 	  Name: 'John Doe',
@@ -56,16 +59,23 @@
 		({nodes, node_positions, selected_node_id } = await init_position_nodes(query, dataset.value));
 	}
 
+	async function ask() {
+		console.log("ask");
+		data = await ask_gpt(query, nodes);
+		answer = data.answer;
+	}
+
 	// reactively run search_query when dataset changes
 	$: if (dataset) search_query();
 
 </script>
   
 <div class="toolbar-container">
-	<Toolbar bind:query on:click={search_query} bind:dataset />
+	<Toolbar bind:query on:click={search_query} bind:dataset on:ask={ask} />
+	{answer}
 </div>
 
-<Web bind:nodes bind:node_positions bind:selected_node_id bind:dataset />
+<Web bind:nodes bind:node_positions bind:selected_node_id bind:dataset bind:question />
 
 <style>
 	/* toolbar-container is absolute positioned in center top (overlay w/ opacity) */

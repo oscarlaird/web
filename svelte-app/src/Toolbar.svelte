@@ -4,6 +4,7 @@
     import QAButton from "./QAButton.svelte";
 
     export let query;
+    export let question;
     export let dataset;
 
     /* send event on button press */
@@ -12,6 +13,11 @@
     function handleClick() {
         dispatch('click', {
             query: query
+        });
+    }
+    function handleAsk() {
+        dispatch('ask', {
+            question: question
         });
     }
 
@@ -32,5 +38,5 @@
 <div class="toolbar">
     <SelectorDropdownDataset bind:dataset />
     <NodeGeneratorButton bind:query on:click={handleClick} />
-    <QAButton />
+    <QAButton bind:question on:ask={handleAsk} />
 </div>

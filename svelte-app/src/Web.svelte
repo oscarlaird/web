@@ -68,7 +68,7 @@
     {#each lines as line}
         <line x1={line.x1 + 'px'} y1={line.y1 + 'px'} 
                 x2={line.x2 + 'px'} y2={line.y2 + 'px'} 
-                stroke="black" stroke-width={11 - line.stroke_width} />
+                stroke=var(--tertiary) stroke-width={11 - line.stroke_width} />
     {/each}
 </svg>
 {/key}

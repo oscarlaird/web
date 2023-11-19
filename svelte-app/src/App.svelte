@@ -79,7 +79,6 @@
 		left: 0;
 		top: 0;
 		z-index: 1;
-		border: 2px solid black;
 		/* set background opacity to 60% */
 		background-color: var(--primary);
 	}

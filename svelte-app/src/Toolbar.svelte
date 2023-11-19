@@ -6,6 +6,7 @@
     export let query;
     export let question;
     export let dataset;
+    export let answer;
 
     /* send event on button press */
     import { createEventDispatcher } from 'svelte';
@@ -32,11 +33,24 @@
   justify-content: center;
   font-size: 1.5em;
 }
-
+.answer_box {
+    width: 400px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--background);
+}
 </style>
 
 <div class="toolbar">
     <SelectorDropdownDataset bind:dataset />
     <NodeGeneratorButton bind:query on:click={handleClick} />
     <QAButton bind:question on:ask={handleAsk} />
+    <div class="answer_box">
+        <p>{answer}</p>
+    </div>
 </div>

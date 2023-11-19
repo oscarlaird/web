@@ -1,6 +1,7 @@
 <script>
     // Props received by the component
     import { Accordion, AccordionItem } from 'svelte-collapsible'
+    import { prevent_default } from 'svelte/internal';
 
 
     export let fields = {};
@@ -109,7 +110,7 @@ button img {
 
 {#if nodeType == 'Small'}
 <button class:active={active} class:hover={hover} class="node_small" 
-    on:click={() => {active = !active}} 
+    on:contextmenu={prevent_default(() => {active = !active, fields.active = !fields.active})}
     on:mouseover={() => {hover = !hover, expandDetails}}
     on:focus={() => {hover = !hover}}
     on:mouseout={() => {hover = !hover, hideDetails}}

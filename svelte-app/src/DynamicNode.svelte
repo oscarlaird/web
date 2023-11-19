@@ -20,13 +20,13 @@
 </script>
 
 {#if fields.word}
-    <NodeWord fields={fields} />
+    <NodeWord bind:fields={fields} />
 {:else if fields.video_id}
-    <NodeVideo fields={fields} />
+    <NodeVideo bind:fields={fields} />
 {:else if fields.developer}
-    <NodeGame fields={fields} />
+    <NodeGame bind:fields={fields} />
 {:else if fields.content}
-    <NodeWikipedia fields={fields} />
+    <NodeWikipedia bind:fields={fields} />
 {:else}
-    <NodeSmall fields={fields} />
+    <NodeSmall bind:fields={fields} />
 {/if}

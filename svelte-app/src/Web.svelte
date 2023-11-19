@@ -58,7 +58,7 @@
     <div on:click={() => handleNodeClick(node.id)} on:keydown={() => handleNodeClick(node.id)}
         in:fade={{duration: 0, delay: 1000, easing: cubicIn}} out:fade={{duration: 300, delay: 0, easing: cubicOut}}
         class="node" style="left: {centerX + position_lookup[idx].rel_x}px; top: {centerY + position_lookup[idx].rel_y}px;">
-        <DynamicNode fields={node} />
+        <DynamicNode bind:fields={node} />
     <!-- Include content like text or embedded videos -->
     </div>
 {/each}

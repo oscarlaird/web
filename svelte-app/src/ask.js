@@ -1,7 +1,7 @@
 
 export async function ask_gpt(question, nodes) {
     let prompt = compile_prompt(question, nodes);
-    let url = `http://localhost:5010/ask?question=${question}`;
+    let url = `http://localhost:5010/ask?question=${prompt}`;
     let data = await fetch(url).then(res => res.json())
     return data;
 }

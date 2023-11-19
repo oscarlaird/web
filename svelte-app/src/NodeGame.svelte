@@ -1,6 +1,7 @@
 <script>
     // Props received by the component
     import { Accordion, AccordionItem } from 'svelte-collapsible'
+    //import HoverInfoPopup from './HoverInfoPopup.svelte'
 
 
     export let fields = {};
@@ -119,13 +120,10 @@ button img {
     <img src={fields.img_url} width="172px" height="80px">          <!-- Image -->
     <p>Developer: {fields.developer}</p>                               <!-- Developer -->
     <p>Release Date: {fields.date}</p>                            <!-- Release Date -->
+    <a href={fields.url_info}>Steam Link</a>
 
     
-    <!--
-    <div on:mouseover={expanddetails} on:mouseout={hideDetails}>
-        <p>{showParagraph ? 'Hovering over box!' : ''}</p>
-    </div>
--->
+
       
     
 </button>

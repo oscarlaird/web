@@ -13,7 +13,7 @@
     export let active = false;
     export let hover = false;
 
-    export let nodeType = 'Small';
+    export let nodeType = 'Large';
 
     /*
     function expandDetails() = {

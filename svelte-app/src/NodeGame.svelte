@@ -61,7 +61,7 @@
     
 	filter: drop-shadow(20px);
 	border-radius: 20px;
-    border: 5px solid black;
+    border: 5px solid var(--secondary);
     border-color: #f4f4f4;
 
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -71,7 +71,7 @@
 
 .active {
     border: 5px solid black;
-    border-color: tomato;
+    border-color: var(--tertiary);
     transition: .1s;
 }
 

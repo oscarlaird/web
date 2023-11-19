@@ -3,7 +3,12 @@ html, body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	background-color: antiquewhite;
+	/* set primary, secondary colors */
+	--primary: #253042;
+	--secondary: #FFFFFF;
+	--tertiary: #EEB31A;
+	--background: #E7ECEF;
+	background-color: var(--background);
 }
 
 body {

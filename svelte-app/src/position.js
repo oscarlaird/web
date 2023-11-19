@@ -20,21 +20,57 @@ export function dummy_fetch_nn(query, node) {
     }
   }
 
-export async function fetch_nn(query, node) {
-  // http://localhost:5000/get_similar_games?query=competitive%20battle%20royale
-  console.log("node: ", node)
-  if (node !== null) {
-    query = node.full_desc;
-  };
-  console.log("query: ", query);
-  let data = await fetch(`http://localhost:5000/get_similar_games?query=${query}`).then(res => res.json())
-  console.log("data: ", data);
-  // add id=_row_id to each node
-  data = data.map((node, index) => {
-    node.id = node._row_id;
-    return node;
-  });
-  return data;
+export async function fetch_nn(query, node, dataset) {
+  // WORDS
+  if (dataset === "words") {
+    if (node !== null) {
+      query = node.word;
+    }
+    let url = `http://localhost:5002/get_similar_words?query=${query}`;
+    let data = await fetch(url).then(res => res.json())
+    // add id=_row_id to each node
+    data = data.map((node, index) => {
+      node.id = node._row_id;
+      return node;
+    });
+    return data;
+  // VIDEOS
+  } else if (dataset === "videos") {
+    if (node !== null) {
+      query = node.transcript;
+    }
+    let url = `http://localhost:5001/get_similar_videos?query=${query}`;
+    let data = await fetch(url).then(res => res.json())
+    // add id=_row_id to each node
+    data = data.map((node, index) => {
+      node.id = node._row_id;
+      return node;
+    });
+    return data;
+  // WIKIPEDIA
+  } else if (dataset === "wikipedia") {
+    if (node !== null) {
+      query = node.content;
+    }
+    let url = `http://34.31.68.141:5001/query_question?query=${query}`;
+    let data = await fetch(url).then(res => res.json())
+    // TODO: ADD ID
+    return data;
+  // GAMES
+  } else {
+      // http://localhost:5000/get_similar_games?query=competitive%20battle%20royale
+      if (node !== null) {
+        query = node.full_desc;
+      };
+
+      let data = await fetch(`http://localhost:5000/get_similar_games?query=${query}`).then(res => res.json())
+      // add id=_row_id to each node
+      data = data.map((node, index) => {
+        node.id = node._row_id;
+        return node;
+      });
+      return data;
+  }
 }
   
 
@@ -70,8 +106,8 @@ positions.map(position => {
     return position;
 });
 
-export async function init_position_nodes(query) {
-    const fetchedNodes = await fetch_nn(query, null);
+export async function init_position_nodes(query, dataset) {
+    const fetchedNodes = await fetch_nn(query, null, dataset);
     const nodePositionTable = fetchedNodes.slice(0, 10).map((node, index) => {  // assuming we get the fetchedNodes in sorted order, 
       return { node_id: node.id, pos_id: positions[index].pos_id };
     });
@@ -85,11 +121,11 @@ export async function init_position_nodes(query) {
 export function calculatePolarAngle(node, center) {
     return Math.atan2(node.y - center.y, node.x - center.x) * (180 / Math.PI);
 }
-export async function new_neighbors(query, old_neighbors, old_node_positions, old_center_node_id, new_center_node_id) {
+export async function new_neighbors(query, old_neighbors, old_node_positions, old_center_node_id, new_center_node_id, dataset) {
     // Fetch new neighbors
     let node = old_neighbors.find(neighbor => neighbor.id === new_center_node_id);
     console.log("node: ", node);
-    let fetchedNewNeighbors = await fetch_nn(query, node);
+    let fetchedNewNeighbors = await fetch_nn(query, node, dataset);
     console.log("fetchedNewNeighbors: ", fetchedNewNeighbors);
     // remove node from fetchedNewNeighbors and old_neighbors ( use filter )
     fetchedNewNeighbors = fetchedNewNeighbors.filter(newNode => newNode.id !== node.id);

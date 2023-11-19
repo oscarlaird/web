@@ -12,6 +12,8 @@
     export let centerX = 1300;
     export let centerY = 550;
 
+    export let dataset;
+
     $: position_lookup = nodes.map(node => {
         if (node.id === selected_node_id) return {rel_x: 0, rel_y: 0};
         return positions.find(pos => pos.pos_id === node_positions.find(np => np.node_id === node.id).pos_id);
@@ -36,7 +38,7 @@
         // update nodes and node_positions 
         let new_ctr_pos_id = node_positions.find(np => np.node_id === node_id).pos_id;
         let new_ctr_pos = positions.find(pos => pos.pos_id === new_ctr_pos_id);
-        ({ nodes, node_positions } = await new_neighbors("dummy_query", nodes, node_positions, selected_node_id, node_id));
+        ({ nodes, node_positions } = await new_neighbors("dummy_query", nodes, node_positions, selected_node_id, node_id, dataset.value));
         // centerX += new_ctr_pos.rel_x;
         // centerY += new_ctr_pos.rel_y;
         selected_node_id = node_id;
@@ -79,7 +81,6 @@
     overflow: hidden;
     position: relative;
     user-select: none;
-    cursor: grab;
 }
 .node {
     position: absolute;

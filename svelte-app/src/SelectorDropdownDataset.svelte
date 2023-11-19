@@ -1,11 +1,13 @@
 <script>
 	import Select from 'svelte-select';
+    export let dataset;
 		
 	const datasetItems = [
 		{value: 'research', label: 'Research'},
         {value: 'wikipedia', label: 'Wikipedia'},
         {value: 'games', label: 'Games'},
         {value: 'words', label: 'Words'},
+        {value: 'videos', label: 'Videos'},
 	];
 	
 	const groupBy = (item) => item.group;
@@ -25,5 +27,5 @@
 
 
 <div class="selector_div">
-    <Select items={datasetItems} --border-radius="10px" placeholder="Select a dataset"></Select>
+    <Select items={datasetItems} --border-radius="10px" placeholder="Select a dataset" bind:value={dataset} ></Select>
 </div>

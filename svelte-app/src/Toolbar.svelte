@@ -4,6 +4,7 @@
     import QAButton from "./QAButton.svelte";
 
     export let query;
+    export let dataset;
 
     /* send event on button press */
     import { createEventDispatcher } from 'svelte';
@@ -29,7 +30,7 @@
 </style>
 
 <div class="toolbar">
-    <SelectorDropdownDataset />
+    <SelectorDropdownDataset bind:dataset />
     <NodeGeneratorButton bind:query on:click={handleClick} />
     <QAButton />
 </div>

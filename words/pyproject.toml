@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "words"
+version = "0.1.0"
+description = ""
+authors = ["Oscar Laird <olaird25@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+youtube-transcript-api = "^0.6.1"
+python = ">=3.10, <3.12"
+notebook = "^7.0.5"
+torch = "2.1.0+cu121"
+sentence-transformers = "^2.2.2"
+evadb = "^0.3.7"
+openai = "^0.28.1"
+python-dotenv = "^1.0.0"
+faiss-gpu = "^1.7.2"
+scipy = "^1.11.3"
+flask = "^3.0.0"
+flask-cors = "^4.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[[tool.poetry.source]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu121/"
+priority = "supplemental"

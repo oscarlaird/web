@@ -11,6 +11,7 @@
     import NodeGame from "./NodeGame.svelte";
 
 	let query;
+	let dataset;
   
 	let data = {
 	  Name: 'John Doe',
@@ -47,21 +48,24 @@
 
 	// on mount init_position_nodes
 	onMount(async () => {
-		({nodes, node_positions, selected_node_id } = await init_position_nodes("initial_query"));
+		({nodes, node_positions, selected_node_id } = await init_position_nodes("initial_query", dataset.value));
 	})
 
 	async function search_query() {
 		console.log(query);
-		({nodes, node_positions, selected_node_id } = await init_position_nodes(query));
+		({nodes, node_positions, selected_node_id } = await init_position_nodes(query, dataset.value));
 	}
+
+	// reactively run search_query when dataset changes
+	$: if (dataset) search_query();
 
 </script>
   
 <div class="toolbar-container">
-	<Toolbar bind:query on:click={search_query} />
+	<Toolbar bind:query on:click={search_query} bind:dataset />
 </div>
 
-<Web bind:nodes bind:node_positions bind:selected_node_id />
+<Web bind:nodes bind:node_positions bind:selected_node_id bind:dataset />
 
 <style>
 	/* toolbar-container is absolute positioned in center top (overlay w/ opacity) */
@@ -77,7 +81,7 @@
 		z-index: 1;
 		border: 2px solid black;
 		/* set background opacity to 60% */
-		background-color: rgba(141, 21, 21, 0.9);
+		background-color: var(--primary);
 	}
 </style>
   

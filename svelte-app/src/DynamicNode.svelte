@@ -3,19 +3,30 @@
     import DummyNode from './DummyNode.svelte';
     import DummyNodeRed from './DummyNodeRed.svelte';
     import NodeSmall from './NodeSmall.svelte';
+
+    // real nodes
     import NodeGame from './NodeGame.svelte';
+    import NodeVideo from './NodeVideo.svelte';
+    import NodeWord from './NodeWord.svelte';
+    import NodeWikipedia from './NodeWikipedia.svelte';
 
     export let fields = {};
-    $: node_type = fields['node_type']
-
-
 
     let node;
+
+    // If word is a field, then it is a NodeWord
+    // if video_id is a field, then it is a NodeVideo
+    // if developer is a field, then it is a NodeGame
 </script>
 
-{#if node_type === 'dummy-red'}
-    <DummyNodeRed fields={fields} bind:this={node} />
+{#if fields.word}
+    <NodeWord fields={fields} />
+{:else if fields.video_id}
+    <NodeVideo fields={fields} />
+{:else if fields.developer}
+    <NodeGame fields={fields} />
+{:else if fields.content}
+    <NodeWikipedia fields={fields} />
 {:else}
-    <NodeGame fields={fields} bind:this={node} />
+    <NodeSmall fields={fields} />
 {/if}
-

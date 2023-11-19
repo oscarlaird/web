@@ -9,7 +9,7 @@
 
     export let nodes;
     export let node_positions;
-    export let centerX = 500;
+    export let centerX = 1000;
     export let centerY = 500;
 
     $: position_lookup = nodes.map(node => {
@@ -36,8 +36,8 @@
         let new_ctr_pos_id = node_positions.find(np => np.node_id === node_id).pos_id;
         let new_ctr_pos = positions.find(pos => pos.pos_id === new_ctr_pos_id);
         ({ nodes, node_positions } = await new_neighbors("dummy_query", nodes, node_positions, selected_node_id, node_id));
-        centerX += new_ctr_pos.rel_x;
-        centerY += new_ctr_pos.rel_y;
+        // centerX += new_ctr_pos.rel_x;
+        // centerY += new_ctr_pos.rel_y;
         selected_node_id = node_id;
     }
 
@@ -83,7 +83,6 @@
 </script>
 
 
-{JSON.stringify(positions)}
 <!-- Nodes -->
 <div class="container" bind:this={containerElement}
   on:mousedown={onMousedown}
@@ -129,6 +128,7 @@
     background: white;
     transition: left 1.0s, top 1.0s; /* Adjust the duration as needed */
     transition-delay: 0ms;
+    transform: translate(-50%, -50%);
 }
 .overlay {
         position: absolute;

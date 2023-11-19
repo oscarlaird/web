@@ -30,18 +30,6 @@
 		url_info: 'https://store.steampowered.com/app/945360/Among_Us/'
 	};
 
-	/*
-	//access games db
-	import { getGames } from './gamesDatabase.js';
-
-    let games = [];
-
-    async function fetchData() {
-        games = await getGames();
-    }
-
-    onMount(fetchData);
-	*/
 
 
 	//Leftover code fragment trying to draw svg line
@@ -69,15 +57,8 @@
 
 </script>
   
-<DummyNode fields={data} />
-<NodeSmall fields={data} id={'rectangle1'} class='node_small' x={100} y={100} width={100} height={100}/>
-<NodeSmall fields={data} id={'rectangle2'} x={300} y={300} width={200} height={200}/>
 <NodeGame fields={games_test_data} id={'rectangle2'}/>
 <Toolbar />
-
-<input bind:value={query} />
-<button on:click={search_query}>Search</button>
-
 
 <Web bind:nodes bind:node_positions bind:selected_node_id />
   

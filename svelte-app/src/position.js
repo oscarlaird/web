@@ -52,15 +52,15 @@ export function polarToCartesian(position) {
 
 export let positions = [
     { pos_id: 0, ux_dist: 0, theta: 0 },
-    { pos_id: 1, ux_dist: 410, theta: 0 },
-    { pos_id: 2, ux_dist: 420, theta: 80 },
-    { pos_id: 3, ux_dist: 430, theta: 160 },
-    { pos_id: 4, ux_dist: 440, theta: 240 },
-    { pos_id: 5, ux_dist: 450, theta: 320 },  // -40
-    { pos_id: 6, ux_dist: 460, theta: 40 },
-    { pos_id: 7, ux_dist: 470, theta: 120 },
-    { pos_id: 8, ux_dist: 480, theta: 200 },
-    { pos_id: 9, ux_dist: 490, theta: 280 }
+    { pos_id: 1, ux_dist: 610, theta: 0 },
+    { pos_id: 2, ux_dist: 620, theta: 80 },
+    { pos_id: 3, ux_dist: 630, theta: 160 },
+    { pos_id: 4, ux_dist: 640, theta: 240 },
+    { pos_id: 5, ux_dist: 650, theta: 320 },  // -40
+    { pos_id: 6, ux_dist: 660, theta: 40 },
+    { pos_id: 7, ux_dist: 670, theta: 120 },
+    { pos_id: 8, ux_dist: 680, theta: 200 },
+    { pos_id: 9, ux_dist: 690, theta: 280 }
 ];
 
 positions.map(position => {

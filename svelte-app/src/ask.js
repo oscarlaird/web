@@ -8,8 +8,11 @@ export async function ask_gpt(question, nodes) {
 
 function compile_prompt(question, nodes) {
   let prompt = "Use the following information to answer the question:\n";
+  let any_active = nodes.some(node => node.active);
   nodes.forEach((node, index) => {
-    prompt += JSON.stringify(node);
+    if (!any_active || node.active) {
+      prompt += JSON.stringify(node);
+    }
   });
   prompt += "Question: ";
   prompt += `${question}\n`;

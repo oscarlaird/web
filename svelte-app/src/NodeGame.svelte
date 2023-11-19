@@ -89,7 +89,7 @@
 button img {
     border-radius: 20px;
     border: 5px solid black;
-    border-color: tomato;
+    border-color: var(--tertiary);
 }
 
 </style>

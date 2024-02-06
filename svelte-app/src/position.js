@@ -67,7 +67,7 @@ export async function fetch_nn(query, node, dataset) {
     console.log('data: ', data)
     return data;
   // COURSES
-  } else if (dataset === "courses") {
+  } else if (dataset === "courses" || true) {
       // http://localhost:5010/get_similar_courses?query=databases
       if (node !== null) {
         query = node.title;
@@ -118,15 +118,15 @@ export function polarToCartesian(position) {
 
 export let positions = [
     { pos_id: 0, ux_dist: 0, theta: 0 },
-    { pos_id: 1, ux_dist: 400, theta: 295 },
-    { pos_id: 2, ux_dist: 425, theta: 250 },
-    { pos_id: 3, ux_dist: 500, theta: 210 },
-    { pos_id: 4, ux_dist: 500, theta: 170 },
-    { pos_id: 5, ux_dist: 525, theta: 130 },
-    { pos_id: 6, ux_dist: 500, theta: 90 },
-    { pos_id: 7, ux_dist: 600, theta:  50 },
-    { pos_id: 8, ux_dist: 650, theta: 10 },
-    { pos_id: 9, ux_dist: 650, theta: 330 }
+    { pos_id: 1, ux_dist: 225, theta: 300 },
+    { pos_id: 2, ux_dist: 240, theta: 252 },
+    { pos_id: 3, ux_dist: 300, theta: 210 },
+    { pos_id: 4, ux_dist: 300, theta: 170 },
+    { pos_id: 5, ux_dist: 325, theta: 130 },
+    { pos_id: 6, ux_dist: 300, theta: 90 },
+    { pos_id: 7, ux_dist: 375, theta:  50 },
+    { pos_id: 8, ux_dist: 400, theta: 10 },
+    { pos_id: 9, ux_dist: 400, theta: 330 }
 ];
 
 positions.map(position => {

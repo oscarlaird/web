@@ -6,7 +6,7 @@ html, body {
 	/* set primary, secondary colors */
 	--primary: #253042;
 	--secondary: #FFFFFF;
-	--tertiary: #EEB31A;
+	--tertiary: #2154a5;
 	--background: #E7ECEF;
 	background-color: var(--background);
 }

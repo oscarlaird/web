@@ -9,8 +9,8 @@
 
     export let nodes;
     export let node_positions;
-    export let centerX = 1300;
-    export let centerY = 655;
+    export let centerX = 0;
+    export let centerY = 0;
 
     export let dataset;
     // export let query;
@@ -87,7 +87,9 @@
 .container {
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    left: 50vw;
+    top: 50vh;
+    overflow: visible;
     position: relative;
     user-select: none;
 }
@@ -100,6 +102,7 @@
 }
 .overlay {
         position: absolute;
+        overflow: visible;
         top: 0;
         left: 0;
         z-index: 0;

@@ -32,7 +32,9 @@
 <style>
 
 .node_small {
-    width: 270px;
+    margin: 0;
+    padding: 0;
+    width: 180px;
     
 	filter: drop-shadow(20px);
 	border-radius: 10px;
@@ -47,14 +49,8 @@
     position: relative;
 }
 
-.active {
-    border: 5px solid black;
-    border-color: var(--tertiary);
-    transition: .1s;
-}
-
 .hover {
-    border: 5px solid black;
+    border: 3px solid;
     border-color: var(--tertiary);
     transition: .1s;
 }
@@ -62,16 +58,18 @@
 p {
     margin: 0;
     padding: 0;
-    max-height: 150px;
+    max-height: 80px;
     overflow-y: auto;
     text-align: left;
+    font-size: xx-small;
 }
 img {
     max-width: 100%;
     /* preserve the aspect ratio and crop the height to the middle 50% */
-    max-height: 100px;
+    max-height: 60px;
     object-fit: cover;
     object-position: center;
+    border-radius: 8px 8px 0px 0px;
 }
 h2 {
     text-align: left;
@@ -85,7 +83,7 @@ h3 {
     text-align: left;
     margin: 0px;
     padding: 0px;
-    font-size: 0.7em;
+    font-size: 0.6em;
     font-weight: bold;
     color: black;
     /* italicize */
@@ -93,15 +91,17 @@ h3 {
 }
 .logo {
     /* lazy loading height/width=50 */
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 25px;
+    max-height: 25px;
     object-fit: cover;
     object-position: center;
     loading: lazy;
     background-color: white;
     border: 1px solid black;
+    border-radius: 0px;
 }
 .logo-box {
+    border-radius: 0px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -122,10 +122,11 @@ h3 {
     on:blur={() => {hover = !hover}}>
     <!-- title -->
     <img src={`http://localhost:5005/image/${fields.img_url}`} width="460px" height="215px" loading="lazy">
-    <h2>CS {fields.number} {fields.title}</h2>
+    <h3>CS {fields.number} {fields.title}
     {#if fields.professor && fields.professor != '' && fields.professor != 'unknown' && fields.professor != 'Unknown'}
-        <a on:click={handle_prof_click} href="javascript:void(0);"><h3>{fields.professor}</h3></a>
+        ({fields.professor})
     {/if}
+    </h3>
     <!-- content -->
     <p>{fields.description}</p>
     <!-- programming language logo images -->

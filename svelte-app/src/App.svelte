@@ -13,10 +13,10 @@
     import { bind } from "svelte/internal";
 
 	// import  query and dataset from writable stores.js
-	import { dataset } from "./stores.js";
+	// import { query, dataset } from "./stores.js";
 
-	let query;
-	// let dataset;
+	let query = "";
+	let dataset = "courses";
 	let question;
 	let answer = 'OpenAI Response Here';
   
@@ -45,13 +45,13 @@
 
 	// on mount init_position_nodes
 	onMount(async () => {
-		({nodes, node_positions, selected_node_id } = await init_position_nodes("initial_query", dataset.value));
+		({nodes, node_positions, selected_node_id } = await init_position_nodes("initial_query", dataset));
 		search_query();
 	})
 
 	async function search_query() {
 		console.log(query);
-		({nodes, node_positions, selected_node_id } = await init_position_nodes(query, dataset.value));
+		({nodes, node_positions, selected_node_id } = await init_position_nodes(query, dataset));
 	}
 
 	async function ask() {
@@ -66,7 +66,7 @@
 </script>
 
 <div class="searchabove">
-	<input type="text" bind:value={query} on:change={search_query} placeholder="Search CS courses..." />
+	<input type="text" bind:value={query} on:change={search_query} placeholder="Search CS courses.  Click on a course to see most similar courses." />
 </div>
   
 {#if false}
@@ -94,7 +94,7 @@
 	}
 	.searchabove {
 		position: absolute;
-		top: 30px;
+		top: 5px;
 		left: 50%;
 		transform: translateX(-50%);
 		z-index: 1;

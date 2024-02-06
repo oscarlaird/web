@@ -28,7 +28,8 @@
 
     transition: .1s;
 
-    scale: 0.5;
+    scale: 0.6;
+    font-size: 1.2em;
 }
 
 .active {

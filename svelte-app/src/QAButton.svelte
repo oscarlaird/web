@@ -34,6 +34,6 @@ input {
 
 <span class="search_span">
 
-<input type="text" bind:value={question} placeholder="Ask a Question..." />
+<input type="text" bind:value={question} placeholder="Ask Question" />
 <button class="qa_button" on:click={handleAsk}>ASK</button>
 </span>

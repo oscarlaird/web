@@ -10,9 +10,10 @@
     export let nodes;
     export let node_positions;
     export let centerX = 1300;
-    export let centerY = 550;
+    export let centerY = 655;
 
     export let dataset;
+    // export let query;
 
     $: position_lookup = nodes.map(node => {
         if (node.id === selected_node_id) return {rel_x: 0, rel_y: 0};
@@ -57,9 +58,8 @@
 {#each nodes as node, idx (node.id)}
     <div on:click={() => handleNodeClick(node.id)} on:keydown={() => handleNodeClick(node.id)}
         in:fade={{duration: 0, delay: 1000, easing: cubicIn}} out:fade={{duration: 300, delay: 0, easing: cubicOut}}
-        class="node" style="left: {centerX + position_lookup[idx].rel_x}px; top: {centerY + position_lookup[idx].rel_y}px;">
+        class="node" style="left: {centerX + position_lookup[idx].rel_x}px; top: {centerY + position_lookup[idx].rel_y}px; z-index: {20 - node_positions.find(np => np.node_id === node.id).pos_id};">
         <DynamicNode bind:fields={node} />
-    <!-- Include content like text or embedded videos -->
     </div>
 {/each}
 <!-- Connecting Lines -->

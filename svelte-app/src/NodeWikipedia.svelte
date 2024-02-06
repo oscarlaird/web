@@ -10,9 +10,7 @@
 <style>
 
 .node_small {
-    padding: 10px;
-    margin: 10px;
-    width: 250px;
+    width: 270px;
     
 	filter: drop-shadow(20px);
 	border-radius: 20px;
@@ -39,8 +37,9 @@
 }
 
 p {
-    height: 250px;
+    max-height: 200px;
     overflow-y: auto;
+    text-align: left;
 }
 
 </style>
@@ -53,7 +52,7 @@ p {
     on:mouseout={() => {hover = !hover}}
     on:blur={() => {hover = !hover}}>
     <!-- title -->
-    <h2>{fields.title}</h2>
+    <h3>{fields.title}</h3>
     <!-- content -->
     <p>{fields.content}</p>
 </button>

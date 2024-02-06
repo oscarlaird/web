@@ -47,5 +47,5 @@
     on:focus={() => {hover = !hover}}
     on:mouseout={() => {hover = !hover}}
     on:blur={() => {hover = !hover}}>
-    <h2>{fields.word}</h2>
+    <h2>{fields.wordq}</h2>
 </button>

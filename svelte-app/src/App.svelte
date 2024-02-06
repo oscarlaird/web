@@ -10,9 +10,13 @@
 	import DynamicNode from "./DynamicNode.svelte";
 	import Web from "./Web.svelte";
     import NodeGame from "./NodeGame.svelte";
+    import { bind } from "svelte/internal";
+
+	// import  query and dataset from writable stores.js
+	import { dataset } from "./stores.js";
 
 	let query;
-	let dataset;
+	// let dataset;
 	let question;
 	let answer = 'OpenAI Response Here';
   
@@ -35,16 +39,6 @@
 	};
 
 
-
-	//Leftover code fragment trying to draw svg line
-	const getRectangleCenterCoordinates = (id) => {
-		const rect = document.getElementById(id);
-		if (rect) {
-			return rect.getBoundingClientRect();
-		}
-		return null;
-  	};
-
 	let nodes = [];
 	let node_positions = [];
 	let selected_node_id;
@@ -52,6 +46,7 @@
 	// on mount init_position_nodes
 	onMount(async () => {
 		({nodes, node_positions, selected_node_id } = await init_position_nodes("initial_query", dataset.value));
+		search_query();
 	})
 
 	async function search_query() {
@@ -69,10 +64,16 @@
 	$: if (dataset) search_query();
 
 </script>
+
+<div class="searchabove">
+	<input type="text" bind:value={query} on:change={search_query} placeholder="Search CS courses..." />
+</div>
   
+{#if false}
 <div class="toolbar-container">
 	<Toolbar bind:query on:click={search_query} bind:dataset on:ask={ask} answer={answer} bind:question />
 </div>
+{/if}
 
 <Web bind:nodes bind:node_positions bind:selected_node_id bind:dataset />
 
@@ -90,6 +91,17 @@
 		z-index: 1;
 		/* set background opacity to 60% */
 		background-color: var(--primary);
+	}
+	.searchabove {
+		position: absolute;
+		top: 30px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+	}
+	.searchabove input {
+		width: 600px;
+		font-size: large;
 	}
 </style>
   

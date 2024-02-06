@@ -5,10 +5,13 @@
 	const datasetItems = [
 		{value: 'research', label: 'Research'},
         {value: 'wikipedia', label: 'Wikipedia'},
+        {value: 'courses', label: 'Computer Science Courses'},
+        {value: 'professors', label: 'Professors'},
         {value: 'games', label: 'Games'},
         {value: 'words', label: 'Words'},
         {value: 'videos', label: 'Videos'},
 	];
+
 	
 	const groupBy = (item) => item.group;
 	const itemId = 'id';

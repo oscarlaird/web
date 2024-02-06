@@ -24,9 +24,9 @@ export async function fetch_nn(query, node, dataset) {
   // WORDS
   if (dataset === "words") {
     if (node !== null) {
-      query = node.word;
+      query = node.wordq;
     }
-    let url = `http://localhost:5002/get_similar_words?query=${query}`;
+    let url = `http://localhost:5002/get_similar_wordq?query=${query}`;
     let data = await fetch(url).then(res => res.json())
     // add id=_row_id to each node
     data = data.map((node, index) => {
@@ -52,10 +52,40 @@ export async function fetch_nn(query, node, dataset) {
     if (node !== null) {
       query = node.content;
     }
-    let url = `http://34.31.68.141:5001/query_question?query=${query}`;
+    let url = `http://34.27.103.17:5001/query_question?query=${query}`;
+    console.log('url: ', url);
     let data = await fetch(url).then(res => res.json())
-    // TODO: ADD ID
     return data;
+  // COVID
+  } else if (dataset === "research") {
+    if (node !== null) {
+      query = node.title + " " + node.content;
+    }
+    let url = `http://34.27.103.17:6001/query_question?query=${query}`;
+    console.log('url: ', url)
+    let data = await fetch(url).then(res => res.json())
+    console.log('data: ', data)
+    return data;
+  // COURSES
+  } else if (dataset === "courses") {
+      // http://localhost:5010/get_similar_courses?query=databases
+      if (node !== null) {
+        query = node.title;
+      }
+      let data = await fetch(`http://localhost:5005/get_similar_courses?query=${query}`).then(res => res.json())
+      // add id=_row_id to each node
+      data = data.map((node, index) => { node.id = node._row_id; return node; });
+      return data;
+  // PROFESSORS
+  } else if (dataset === "professors") {
+      // http://localhost:5010/get_similar_courses?query=databases
+      if (node !== null) {
+        query = node.research_profile;
+      }
+      let data = await fetch(`http://localhost:5006/get_similar_professors?query=${query}`).then(res => res.json())
+      // add id=_row_id to each node
+      data = data.map((node, index) => { node.id = node.name; return node; });
+      return data;
   // GAMES
   } else {
       // http://localhost:5000/get_similar_games?query=competitive%20battle%20royale
